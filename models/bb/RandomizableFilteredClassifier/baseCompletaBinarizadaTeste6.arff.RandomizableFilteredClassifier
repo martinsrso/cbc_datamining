@@ -1,0 +1,2 @@
+RandomizableFilteredClassifier - [-S, 1, -F, weka.filters.unsupervised.attribute.RandomProjection -N 10 -R 42 -D Sparse1, -W, weka.classifiers.lazy.IBk, --, -K, 1, -W, 0, -A, weka.core.neighboursearch.LinearNNSearch -A "weka.core.EuclideanDistance -R first-last"]
+0.007776112449029051;1059.4369289005958;1884.5539620562013;113.51456063377128;126.87429631246127;1519.0

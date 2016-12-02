@@ -1,0 +1,2 @@
+LWL - [-U, 0, -K, -1, -A, weka.core.neighboursearch.LinearNNSearch -A "weka.core.EuclideanDistance -R first-last", -W, weka.classifiers.trees.DecisionStump]
+0.11022490830176057;496.15180951149364;1016.8500181408521;74.79143976519447;97.76648746126138;980.0

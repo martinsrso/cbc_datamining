@@ -1,0 +1,2 @@
+SMOreg - [-C, 1.0, -N, 0, -I, weka.classifiers.functions.supportVector.RegSMOImproved -T 0.001 -V -P 1.0E-12 -L 0.001 -W 1, -K, weka.classifiers.functions.supportVector.PolyKernel -E 1.0 -C 250007]
+0.05417113759696404;1066.9680753111747;1983.5288906126268;99.75246434072375;108.94223572102281;1519.0

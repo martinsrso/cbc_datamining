@@ -1,0 +1,2 @@
+RegressionByDiscretization - [-B, 10, -K, weka.estimators.UnivariateEqualFrequencyHistogramEstimator, -W, weka.classifiers.trees.J48, --, -C, 0.25, -M, 2]
+0.3194696175078646;806.5735959564618;1665.5002802812764;88.65754084789151;103.41956773535438;1519.0

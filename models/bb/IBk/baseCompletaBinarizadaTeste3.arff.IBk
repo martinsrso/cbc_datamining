@@ -1,0 +1,2 @@
+IBk - [-K, 1, -W, 0, -A, weka.core.neighboursearch.LinearNNSearch -A "weka.core.EuclideanDistance -R first-last"]
+0.03012956526027005;935.5084518323458;1814.8421904684633;102.82989574376172;112.69298304437045;1519.0
