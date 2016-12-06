@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cbc_datamining:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cbc_datamining_jar</output-path>
+    <root id="archive" name="cbc_datamining.jar">
+      <element id="module-output" name="cbc_datamining" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/libs/weka.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/out/production/cbc_datamining/libs/weka.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
