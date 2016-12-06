@@ -45,12 +45,12 @@ public class Classifiers {
     }};
 
     public static Classifier[] classifiers = {
-            //new LinearRegression(),
-            new MultilayerPerceptron(),
-            new SMOreg(),
+           // new LinearRegression(),
+           // new MultilayerPerceptron(),
+           // new SMOreg(),
            // new IBk(),
-            new KStar(),
-            new LWL(),
+           // new KStar(),
+           // new LWL(),
            // new AdditiveRegression(),
            // new RandomCommittee(),
            // new RandomizableFilteredClassifier(),
@@ -59,7 +59,7 @@ public class Classifiers {
            // new RegressionByDiscretization(),
            // new M5Rules(),
            // new M5P(),
-           // new RandomTree(),
+           new RandomTree(),
            // new RandomForest(),
            // new REPTree(),
     };
