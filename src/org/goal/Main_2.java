@@ -6,9 +6,9 @@ import weka.core.Instances;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
 
-public class Main {
+public class Main_2 {
 
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
 
         try {
             File dir = new File("datafiles/bnb/");
