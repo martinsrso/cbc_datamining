@@ -23,39 +23,49 @@ public class EvalReverse {
     public static void Run(Map<String, String> array, String path) throws Exception {
         for (Map.Entry<String, String> entry : array.entrySet()) {
 
-            BufferedReader reader = new BufferedReader(new FileReader("datafiles_new/" + path + entry.getKey()));
-            BufferedReader reader2 = new BufferedReader(new FileReader("datafiles_new/" + path + entry.getValue()));
-            BufferedReader reader3 = new BufferedReader(new FileReader("datafiles/" + path + entry.getValue()));
-            Instances test_name = new Instances(reader3);
-            Instances train = new Instances(reader2);
-            Instances test;// = new Instances(reader);
-            reader.close();
-            reader2.close();
-            reader3.close();
 
-            train.setClassIndex(train.numAttributes() - 1);
+//            System.out.println("Key: " + entry.getKey());
+//            System.out.println("Value: " + entry.getValue());
 
-            test_name.setClassIndex(test_name.numAttributes() - 1);
+//            BufferedReader reader = new BufferedReader(new FileReader("datafiles_new/" + path + entry.getKey()));
+//            BufferedReader reader2 = new BufferedReader(new FileReader("datafiles_new/" + path + entry.getValue()));
+            BufferedReader reader_test = new BufferedReader(new FileReader("datafiles/" + path + entry.getKey()));
+            BufferedReader reader_train = new BufferedReader((new FileReader("datafiles/" + path + entry.getValue())));
 
-            Remove remove = new Remove();
+            Instances datatest = new Instances(reader_test);
+            Instances datatrain = new Instances(reader_train);
 
-            if (path.equalsIgnoreCase("bb/")){
-                remove.setAttributeIndices("1,18,63,64"); //bb
-            }
-            else {
-                remove.setAttributeIndices("1,18,39,40");   //bnb
-            }
+            Instances teste, train;
 
-            remove.setInputFormat(test_name);
-
-            test = Filter.useFilter(test_name, remove);
-            test.setClassIndex(test.numAttributes() - 1);
+            reader_test.close();
+            reader_train.close();
 
             for (Classifier cls : Classifiers.classifiers) {
+                Remove remove = new Remove();
+
+                if (path.equalsIgnoreCase("bb/")){
+                    remove.setAttributeIndices("1,18,63,64"); //bb
+                }
+                else {
+                    remove.setAttributeIndices("1,18,39,40");   //bnb
+                }
+
+                remove.setInputFormat(datatest);
+                remove.setInputFormat(datatrain);
+
+                teste = Filter.useFilter(datatest, remove);
+                train = Filter.useFilter(datatrain, remove);
+
+
+                teste.setClassIndex(teste.numAttributes() - 1);
+                train.setClassIndex(train.numAttributes() - 1);
+
                 System.out.println("[Start: " + new Date() + "]" + cls.getClass().getSimpleName() + " = " + entry.getKey());
                 cls.buildClassifier(train);
+
                 Evaluation eval = new Evaluation(train);
-                eval.evaluateModel(cls, test);
+                eval.evaluateModel(cls, teste);
+
 
                 String output = cls.getClass().getSimpleName() + " - " + Arrays.toString(Classifiers.opt.get(cls.getClass().getSimpleName())) + "\n" +
                         eval.correlationCoefficient() +";"+ eval.meanAbsoluteError()+";"+ eval.rootMeanSquaredError() +";"+
@@ -65,13 +75,26 @@ public class EvalReverse {
 
                 String rev = "name;ename;atual;atual_ver;predict\n";
 
-                for (int i = 0; i < test.numInstances(); i++) {
-                    rev += test_name.get(i).stringValue(test_name.get(i).attribute(0)) +";"+
-                           test_name.get(i).stringValue(test_name.get(i).attribute(17)) +";"+
-                           test.get(i).classValue() + ";" +
+                for (int i = 0; i < teste.numInstances(); i++) {
+//                    double pred = cls.classifyInstance(teste.instance(i));
+//                    System.out.print("ID: " + teste.instance(i).value(0));
+//                    System.out.print(",ID 2: " + datatest.instance(i).value(0));
+//                    System.out.print(", actual: " + teste.classAttribute().value((int) teste.instance(i).classValue()));
+//                    System.out.println(", predicted: " + teste.classAttribute().value((int) pred));
+//
+//                    System.exit(1);
+
+                    rev += datatest.get(i).stringValue(datatest.get(i).attribute(0)) +";"+
+                           datatest.get(i).stringValue(datatest.get(i).attribute(17)) +";"+
+                           teste.get(i).classValue() + ";" +
                            eval.predictions().get(i).actual() +";"+
-                           eval.predictions().get(i).predicted() + "\n";
+                           eval.predictions().get(i).predicted()+ "\n";
+//                    System.out.println(rev);
+//                    System.exit(1);
                 }
+
+//                System.out.println("Numero de Instancias teste: " + test.numInstances());
+//                System.out.println("Numero de Instancias treino: " + train.numInstances());
 
                 File arq = new File("models/" + path + "/" +cls.getClass().getSimpleName() + "/" + entry.getKey()+"."+cls.getClass().getSimpleName());
                 File arq2 = new File("result_rvs/" + path + "/" +cls.getClass().getSimpleName() + "/" + entry.getKey()+"."+cls.getClass().getSimpleName());

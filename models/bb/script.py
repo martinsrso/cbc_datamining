@@ -22,7 +22,7 @@ def strings(values, string): #retorna string
     return str_full.replace(".",",") + "\n"
 
 for dire in os.listdir():
-    if dire != "csv"and dire != "script.py":
+    if dire != "csv" and dire != "script.py":
 
 
         strs = ["basecompleta","pureinteger","purebinary","mixed-integer",

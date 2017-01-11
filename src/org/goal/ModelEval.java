@@ -31,29 +31,29 @@ public class ModelEval {
             reader.close();
             reader2.close();
 
-            train.setClassIndex(train.numAttributes() - 1);
-            test.setClassIndex(test.numAttributes() - 1);
+            train.setClassIndex(train.numAttributes() - 2);
+            test.setClassIndex(test.numAttributes() - 2);
 
-            for (Classifier cls : Classifiers.classifiers) {
-                System.out.println("[Start: " + new Date() + "]" + cls.getClass().getSimpleName() + " = " + entry.getKey());
-                cls.buildClassifier(train);
-                Evaluation eval = new Evaluation(train);
-                eval.evaluateModel(cls, test);
-
-                String output = cls.getClass().getSimpleName() + " - " + Arrays.toString(Classifiers.opt.get(cls.getClass().getSimpleName())) + "\n" +
-                        eval.correlationCoefficient() +";"+ eval.meanAbsoluteError()+";"+ eval.rootMeanSquaredError() +";"+
-                        eval.relativeAbsoluteError() +";"+ eval.rootRelativeSquaredError()+";" +eval.numInstances() + "\n";
-
-                System.out.println("[End: " + new Date() + "] = " +cls.getClass().getSimpleName() + " - " + Arrays.toString(Classifiers.opt.get(cls.getClass().getSimpleName())));
-
-                File arq = new File("models/" + path + "/" +cls.getClass().getSimpleName() + "/" + entry.getKey()+"."+cls.getClass().getSimpleName());
-                arq.getParentFile().mkdirs();
-                BufferedWriter writer = new BufferedWriter(new FileWriter(arq));
-                writer.write(output);
-                writer.flush();
-                writer.close();
-
-            }
+//            for (Classifier cls : Classifiers.classifiers) {
+//                System.out.println("[Start: " + new Date() + "]" + cls.getClass().getSimpleName() + " = " + entry.getKey());
+//                cls.buildClassifier(train);
+//                Evaluation eval = new Evaluation(train);
+//                eval.evaluateModel(cls, test);
+//
+//                String output = cls.getClass().getSimpleName() + " - " + Arrays.toString(Classifiers.opt.get(cls.getClass().getSimpleName())) + "\n" +
+//                        eval.correlationCoefficient() +";"+ eval.meanAbsoluteError()+";"+ eval.rootMeanSquaredError() +";"+
+//                        eval.relativeAbsoluteError() +";"+ eval.rootRelativeSquaredError()+";" +eval.numInstances() + "\n";
+//
+//                System.out.println("[End: " + new Date() + "] = " +cls.getClass().getSimpleName() + " - " + Arrays.toString(Classifiers.opt.get(cls.getClass().getSimpleName())));
+//
+//                File arq = new File("models/" + path + "/" +cls.getClass().getSimpleName() + "/" + entry.getKey()+"."+cls.getClass().getSimpleName());
+//                arq.getParentFile().mkdirs();
+//                BufferedWriter writer = new BufferedWriter(new FileWriter(arq));
+//                writer.write(output);
+//                writer.flush();
+//                writer.close();
+//
+//            }
         }
     }
 }
